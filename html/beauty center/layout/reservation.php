@@ -60,13 +60,13 @@ include('../../layout/DB.php');
      $hour = $_POST['hour'];
      $phone = $_POST['phone'];
      $mail = $_POST['mail'];
-     $user_id = $_SESSION['id'];
+     $id = $_SESSION['user_ID'];
      
      
  
  
      $sql = "INSERT INTO beautycenter(selected,day,hour,phone,mail,iduser)
-     VALUES('$select','$day','$hour','$phone','$mail','$user_id')";
+     VALUES('$select','$day','$hour','$phone','$mail','$id')";
  
  if(mysqli_query($connection,$sql))
  {

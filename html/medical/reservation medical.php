@@ -59,10 +59,11 @@ if(isset($_POST['send']))
     $hour = $_POST['hour'];
     $phone = $_POST['phone'];
     $mail = $_POST['mail'];
+    $id = $_SESSION['user_ID'];
 
 
-    $sql = "INSERT INTO clinics(clinic,day,hour,phone,mail)
-    VALUES('$clinic','$day','$hour','$phone','$mail')";
+    $sql = "INSERT INTO clinics(clinic,day,hour,phone,mail,user_id_clinic)
+    VALUES('$clinic','$day','$hour','$phone','$mail',$id)";
 
 if(mysqli_query($connection,$sql))
 {

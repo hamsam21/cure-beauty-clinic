@@ -170,10 +170,11 @@ if(isset($_POST['send']))
 {
     $mail = $_POST['mail'];
     $proposal = $_POST['proposal'];
+    $id = $_SESSION['user_ID'];
    
     
-    $sql = "INSERT INTO proposal(E_mail,proposal)
-    VALUES('$mail','$proposal')";
+    $sql = "INSERT INTO proposal(E_mail,proposal,userID_FKP)
+    VALUES('$mail','$proposal',$id)";
 
     if(mysqli_query($connection,$sql))
     {
@@ -192,12 +193,13 @@ include('../../layout/DB.php');
         <?php
 if(isset($_POST['send1']))
 {
-    $mail = $_POST['mail'];
+    $mail = $_POST['email'];
     $complain = $_POST['complain'];
+    $id = $_SESSION['user_ID'];
    
     
-    $sql = "INSERT INTO complain(E_mail,complain)
-    VALUES('$mail','$complain')";
+    $sql = "INSERT INTO complain(E_mail,complain,userID_FKC)
+    VALUES('$mail','$complain',$id)";
 
     if(mysqli_query($connection,$sql))
     {
@@ -209,14 +211,7 @@ if(isset($_POST['send1']))
 }
 
 ?>
-
-
-
-
-
-
-
-        <!-- Modal: Subscription1 From -->
+   <!-- Modal: Subscription1 From -->
         <div class="modal fade" id="modalSubscription1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
           <div class="modal-dialog cascading-modal" role="document">

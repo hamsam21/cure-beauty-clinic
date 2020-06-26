@@ -58,10 +58,11 @@
      $hour = $_POST['hour'];
      $phone = $_POST['phone'];
      $mail = $_POST['mail'];
+     $id = $_SESSION['user_ID'];
  
  
-     $sql = "INSERT INTO spagym(selected,day,hour,phone,mail)
-     VALUES('$select','$day','$hour','$phone','$mail')";
+     $sql = "INSERT INTO spagym(selected,day,hour,phone,mail,userID)
+     VALUES('$select','$day','$hour','$phone','$mail',$id)";
  
  if(mysqli_query($connection,$sql))
  {

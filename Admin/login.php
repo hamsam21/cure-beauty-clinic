@@ -79,29 +79,21 @@ include('../layout/DB.php');
  <?php 
   if(isset($_POST['login']))
   {
-      echo 'listen ok';
+  
       $mail = $_POST['mail'];
       $pass = $_POST['pass'];
 
-      $login = "SELECT name,user_ID,E_mail,password FROM users WHERE E_mail='$mail' AND password='$pass'";
+      $login = "SELECT name,user_ID,E_mail,password FROM admin WHERE E_mail='$mail' AND password='$pass'";
       $result = mysqli_query($connection,$login);
-      if(mysqli_num_rows($result)>0)
-      {
-
-          while($row = mysqli_fetch_assoc($result))
-          {
-              $id = $row['id'];
-              session_start();
-              $_SESSION['id'] = $id;
-              $_SESSION['name'] = $row['name'];
-          }
+      
           header('location:admin.php');
-      }else
+    
+   } else
       {
           echo 'error no such user found';
       }
 
-  }
+    
   ?>
 <form class="text-center border border-light p-5 login welcome" action="" method='post'>
 

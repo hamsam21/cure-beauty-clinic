@@ -27,7 +27,7 @@ include('../../layout/DB.php');
  <?php 
   if(isset($_POST['login']))
   {
-      echo 'listen ok';
+      
       $mail = $_POST['mail'];
       $pass = $_POST['pass'];
 
@@ -38,10 +38,11 @@ include('../../layout/DB.php');
 
           while($row = mysqli_fetch_assoc($result))
           {
-              $id = $row['id'];
+              $id = $row['user_ID'];
               session_start();
-              $_SESSION['id'] = $id;
+              $_SESSION['user_ID'] = $row['user_ID'];
               $_SESSION['name'] = $row['name'];
+              echo 'session';
           }
           header('location:welcomehome.php');
       }else

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2020 at 02:59 AM
+-- Generation Time: Jun 26, 2020 at 09:16 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.2.20
 
@@ -42,7 +42,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_ID`, `name`, `E_mail`, `password`, `phone`, `city`) VALUES
-(1, 'hamsa', 'hamsa@gmail.com', '123', '01093883142', 'egypt');
+(1, 'hamsa', 'hamsa@gmail.com', '123', '01093883142', 'egypt'),
+(2, 'mohamed', 'mohamed@gmail.com', '1234', '01022318383', 'cairo');
 
 -- --------------------------------------------------------
 
@@ -60,6 +61,13 @@ CREATE TABLE `beautycenter` (
   `iduser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `beautycenter`
+--
+
+INSERT INTO `beautycenter` (`code_beauty`, `selected`, `day`, `hour`, `phone`, `mail`, `iduser`) VALUES
+(45, 'Makeup Artist', 'Tuesday', '7 pm', '01093883142', 'ahmed@yahoo.com', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -73,15 +81,24 @@ CREATE TABLE `clinics` (
   `hour` varchar(10) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `mail` varchar(70) NOT NULL,
-  `user_id_clinic` int(11) NOT NULL
+  `user_id_clinic` int(11) DEFAULT NULL,
+  `doctor_id` int(11) DEFAULT NULL,
+  `note` tinytext NOT NULL,
+  `Specific doctor` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `clinics`
 --
 
-INSERT INTO `clinics` (`code_clinic`, `clinic`, `day`, `hour`, `phone`, `mail`, `user_id_clinic`) VALUES
-(1, 'Dental', 'Monday', '5 pm', '01022318383', 'koky@yahoo.com', 0);
+INSERT INTO `clinics` (`code_clinic`, `clinic`, `day`, `hour`, `phone`, `mail`, `user_id_clinic`, `doctor_id`, `note`, `Specific doctor`) VALUES
+(12, 'dental', 'sunday', '7', '01093883', 'hamsa@gmail.com', 1, 1, 'accept', 'dr.ahmed'),
+(13, 'dental', 'sunday', '9', '0109388', 'ahmed@gmail.com', 3, 1, '', ''),
+(14, 'eye', 'sunday', '5', '010987654', 'eman@gmail.com', 2, 1, '', ''),
+(20, 'Nose and Ear', 'Thursday', '7 pm', '01826256', 'ha@gmail.com', 1, NULL, '', ''),
+(21, 'Psychological and neurological', 'Tuesday', '7 pm', '012345', 'esraa@yahoo.com', 1, NULL, '', ''),
+(22, 'Blood vessels', 'Wednesday', '7 pm', '01093883142', 'koky@yahoo.com', 1, NULL, '', ''),
+(23, 'Nose and Ear', 'Thursday', '7 pm', '01234567', 'ahmed@yahoo.com', 3, NULL, '', '');
 
 -- --------------------------------------------------------
 
@@ -91,10 +108,41 @@ INSERT INTO `clinics` (`code_clinic`, `clinic`, `day`, `hour`, `phone`, `mail`, 
 
 CREATE TABLE `complain` (
   `code` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
+  `E_mail` varchar(80) NOT NULL,
   `complain` text NOT NULL,
   `userID_FKC` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `complain`
+--
+
+INSERT INTO `complain` (`code`, `E_mail`, `complain`, `userID_FKC`) VALUES
+(3, 'HAMSA@yahoo.com', 'test', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor`
+--
+
+CREATE TABLE `doctor` (
+  `id_doctor` int(11) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `E_mail` varchar(70) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `city` varchar(70) NOT NULL,
+  `speciality` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctor`
+--
+
+INSERT INTO `doctor` (`id_doctor`, `name`, `E_mail`, `password`, `phone`, `city`, `speciality`) VALUES
+(1, 'hamsa', 'hamsa@gmail.com', '1234', '01093883142', 'egypt', 'dental'),
+(2, 'ahmed', 'ahmed@gmail.com', '123', '0109388', 'egypt', 'woman');
 
 -- --------------------------------------------------------
 
@@ -117,10 +165,9 @@ CREATE TABLE `femalelab` (
 --
 
 INSERT INTO `femalelab` (`code_lab`, `lab`, `day`, `hour`, `phone`, `mail`, `user_ID`) VALUES
-(1, '0', '0', '7', '1093883142', '0', 0),
-(2, '0', '0', '7', '1093883142', '0', 0),
 (3, 'Echo', 'Tuesday', '7 pm', '01093883142', 'mohamed@gmail.com', 0),
-(4, 'Echo', 'Monday', '5 pm', '01234567', 'ha@gmail.com', 0);
+(4, 'Echo', 'Monday', '5 pm', '01234567', 'ha@gmail.com', 0),
+(5, 'Mammogram', 'Tuesday', '7 pm', '01093883142', 'passent@gmail.coom', 1);
 
 -- --------------------------------------------------------
 
@@ -134,6 +181,13 @@ CREATE TABLE `proposal` (
   `proposal` text NOT NULL,
   `userID_FKP` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `proposal`
+--
+
+INSERT INTO `proposal` (`code`, `E_mail`, `proposal`, `userID_FKP`) VALUES
+(16, 'hamsa@gmail.com', 'the beauteful web', 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +213,8 @@ INSERT INTO `spagym` (`code_sg`, `selected`, `day`, `hour`, `phone`, `mail`, `us
 (1, 'zomba', 'Tuesday', '7 pm', '01069718716', 'khaw5aty@gmail.com', 0),
 (2, 'zomba', 'Tuesday', '7 pm', '01093883142', 'hamsa@gmail.com', 0),
 (3, 'zomba', 'Monday', '9 pm', '01093883142', 'hamsa@gmail.com', 0),
-(4, 'zomba', 'Monday', '9 pm', '01093883142', 'hamsa@gmail.com', 0);
+(4, 'zomba', 'Monday', '9 pm', '01093883142', 'hamsa@gmail.com', 0),
+(5, 'Sauna and Jacuzzi', 'Monday', '7 pm', '01826256', 'passent@gmail.coom', 1);
 
 -- --------------------------------------------------------
 
@@ -208,7 +263,8 @@ ALTER TABLE `beautycenter`
 --
 ALTER TABLE `clinics`
   ADD PRIMARY KEY (`code_clinic`),
-  ADD KEY `user_id_clinic` (`user_id_clinic`);
+  ADD KEY `user_id_clinic` (`user_id_clinic`),
+  ADD KEY `doctor_id` (`doctor_id`);
 
 --
 -- Indexes for table `complain`
@@ -216,6 +272,12 @@ ALTER TABLE `clinics`
 ALTER TABLE `complain`
   ADD PRIMARY KEY (`code`),
   ADD KEY `userID_FKC` (`userID_FKC`);
+
+--
+-- Indexes for table `doctor`
+--
+ALTER TABLE `doctor`
+  ADD PRIMARY KEY (`id_doctor`);
 
 --
 -- Indexes for table `femalelab`
@@ -252,43 +314,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `beautycenter`
 --
 ALTER TABLE `beautycenter`
-  MODIFY `code_beauty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `code_beauty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `clinics`
 --
 ALTER TABLE `clinics`
-  MODIFY `code_clinic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `code_clinic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `complain`
 --
 ALTER TABLE `complain`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `doctor`
+--
+ALTER TABLE `doctor`
+  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `femalelab`
 --
 ALTER TABLE `femalelab`
-  MODIFY `code_lab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `code_lab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `spagym`
 --
 ALTER TABLE `spagym`
-  MODIFY `code_sg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `code_sg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -310,6 +378,7 @@ ALTER TABLE `beautycenter`
 -- Constraints for table `clinics`
 --
 ALTER TABLE `clinics`
+  ADD CONSTRAINT `doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id_doctor`),
   ADD CONSTRAINT `user_id_clinic` FOREIGN KEY (`user_id_clinic`) REFERENCES `users` (`user_ID`);
 
 --

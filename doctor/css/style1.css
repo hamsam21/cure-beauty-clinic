@@ -1,0 +1,33 @@
+
+.main div h1
+{
+    color:#eee;
+}
+.welcome
+{
+    position: relative;
+    top: -00vh;
+    
+}
+.welcome button
+{
+    border-radius: 25px;
+    opacity: .9;
+}
+.login
+{
+    
+    width: 50%;
+    color: #eee;
+    display: none;
+}
+.signup
+{
+    width: 50%;
+    color: #eee;
+    display: none;
+}
+.img-responsive
+{
+    width: 450px;
+}
