@@ -21,7 +21,8 @@
       <a class="btn pink-gradient btn-rounded btn-lg font-weight-bold"id='login-btn'>login</a>
       <a class="btn pink-gradient btn-rounded btn-lg font-weight-bold"id='signup-btn'>signup</a>
       <?php
-include('../../layout/DB.php');
+#include('../../layout/DB.php');
+include('layout/DB.php');
 
  ?>
  <?php 
