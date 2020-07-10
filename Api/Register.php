@@ -6,7 +6,6 @@ include('../layout/DB.php');
 
 $json = file_get_contents('php://input');
 
-// Converts it into a PHP object
 if(!empty($json))
 {
     $data = json_decode($json);
@@ -23,24 +22,9 @@ if(!empty($json))
         echo json_encode(['data'=>['status'=>'200','message'=>'new user added correctlly']]);
     }else
     {
-        echo json_encode([['data'=>['status'=>'500','message'=>'an error occure try again']]]);
+        echo json_encode(['data'=>['status'=>'500','message'=>'an error occure try again']]);
     }
   
 }
-/*
-$data = ['data'=>[]];
-
-$sql = "SELECT * FROM users";
-
-$result = mysqli_query($connection,$sql);
-
-while($rows = mysqli_fetch_assoc($result))
-{
-    array_push($data['data'],$rows);
-}
-
-echo json_encode($data);
-
-*/
 
 ?>
